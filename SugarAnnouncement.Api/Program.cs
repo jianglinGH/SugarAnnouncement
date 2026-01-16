@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 
+// 配置全局日志系统 Debug/Info/Warning/Error
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -21,12 +22,13 @@ Log.Logger = new LoggerConfiguration()
 
 try {
     Log.Information("-------启动 Sugar API 服务-------");
-    //构建ASP.NET Core Web应用的初始化环境
+    //构建ASP.NET Core Web应用构建器
     var builder = WebApplication.CreateBuilder(args);
 
-
+    //使用日志系统
     builder.Host.UseSerilog();
 
+    //配置 web 服务器监听端口和协议
     builder.WebHost.ConfigureKestrel(options =>
     {
         options.ListenAnyIP(5153); // HTTP
@@ -58,12 +60,14 @@ void ConfigureServices(IServiceCollection services) {
         .AddJsonOptions(options => { 
             // 属性名改成驼峰输出
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            //美化输出
             options.JsonSerializerOptions.WriteIndented = true;
+            //枚举转字符串
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             // 序列化忽视null属性
             options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
-    // 配置 CORS
+    // 配置 CORS 允许跨域
     services.AddCors(options =>
     {
         options.AddPolicy("SugarPolicy", policy =>

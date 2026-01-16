@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SugarAnnouncement.Api/SugarAnnouncement.Api.csproj" />
+  <Project Path="SugarAnnouncement.Core/SugarAnnouncement.Core.csproj" Id="6d782ca8-de73-4382-883a-d36c98c6e608" />
+  <Project Path="SugarAnnouncement.Infrastructure/SugarAnnouncement.Infrastructure.csproj" Id="9c62f3fa-5067-4dbd-95cd-e33e2928218e" />
+</Solution>

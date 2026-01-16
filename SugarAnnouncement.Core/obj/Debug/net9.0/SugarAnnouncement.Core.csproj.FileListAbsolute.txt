@@ -1,0 +1,11 @@
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\bin\Debug\net9.0\SugarAnnouncement.Core.deps.json
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\bin\Debug\net9.0\SugarAnnouncement.Core.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\bin\Debug\net9.0\SugarAnnouncement.Core.pdb
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.AssemblyInfoInputs.cache
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.AssemblyInfo.cs
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.csproj.CoreCompileInputs.cache
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\refint\SugarAnnouncement.Core.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\SugarAnnouncement.Core.pdb
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Core\obj\Debug\net9.0\ref\SugarAnnouncement.Core.dll

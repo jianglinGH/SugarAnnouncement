@@ -1,0 +1,15 @@
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\bin\Debug\net9.0\SugarAnnouncement.Infrastructure.deps.json
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\bin\Debug\net9.0\SugarAnnouncement.Infrastructure.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\bin\Debug\net9.0\SugarAnnouncement.Infrastructure.pdb
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\bin\Debug\net9.0\SugarAnnouncement.Core.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\bin\Debug\net9.0\SugarAnnouncement.Core.pdb
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.csproj.AssemblyReference.cache
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.AssemblyInfoInputs.cache
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.AssemblyInfo.cs
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.csproj.CoreCompileInputs.cache
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnn.5BF93727.Up2Date
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\refint\SugarAnnouncement.Infrastructure.dll
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\SugarAnnouncement.Infrastructure.pdb
+E:\MyProject\JspCsharp\Csharp\SugarAnnouncement\SugarAnnouncement.Infrastructure\obj\Debug\net9.0\ref\SugarAnnouncement.Infrastructure.dll

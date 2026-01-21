@@ -38,7 +38,7 @@ namespace SugarAnnouncement.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateAnnouncementRequest dto)
         {
-            if (!Enum.IsDefined(typeof(AnnouncementCategory), dto.Category))
+            if (!Enum.TryParse<AnnouncementCategory>(dto.Category, true, out var cat))
             {
                 return BadRequest(ApiResponse<string>.Failure("分类不合法"));
             }
@@ -47,7 +47,7 @@ namespace SugarAnnouncement.Api.Controllers
             {
                 Title = dto.Title,
                 Content = dto.Content,
-                Category = dto.Category,
+                Category = cat,
                 Author = dto.Author,
                 IsTop = dto.IsTop,
                 PublishTime = dto.PublishTime
@@ -62,13 +62,16 @@ namespace SugarAnnouncement.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAnnouncementRequest dto)
         {
+            if (!Enum.TryParse<AnnouncementCategory>(dto.Category, true, out var cat)) { 
+                return BadRequest(ApiResponse<string>.Failure("分类不合法"));
+            }
             // DTO -> Entity 映射
             var entity = new Announcement
             {
                 Id = dto.Id,
                 Title = dto.Title,
                 Content = dto.Content,
-                Category = dto.Category,
+                Category = cat,
                 Author = dto.Author,
                 IsTop = dto.IsTop,
                 PublishTime = dto.PublishTime

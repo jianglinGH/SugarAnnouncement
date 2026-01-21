@@ -21,4 +21,9 @@
     <ProjectReference Include="..\SugarAnnouncement.Infrastructure\SugarAnnouncement.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middleware\" />
+    <Folder Include="Common\" />
+  </ItemGroup>
+
 </Project>

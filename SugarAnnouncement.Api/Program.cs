@@ -1,9 +1,14 @@
  
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
+using SugarAnnouncement.Api.Middleware;
+using SugarAnnouncement.Core.Interfaces;
+using SugarAnnouncement.Infrastructure.Data;
+using SugarAnnouncement.Infrastructure.Respositories;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.OpenApi.Models;
 
 // 配置全局日志系统 Debug/Info/Warning/Error
 Log.Logger = new LoggerConfiguration()
@@ -25,15 +30,32 @@ try {
     //构建ASP.NET Core Web应用构建器
     var builder = WebApplication.CreateBuilder(args);
 
+
+    var folder = Path.Combine(AppContext.BaseDirectory, "Data");
+    if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+    var dbPath = Path.Combine(folder, "announcement_sugar.db");
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite($"Data Source={dbPath}"));
+     
+    builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+
+    builder.Services.AddControllers()
+        .AddJsonOptions(options => {
+            // 枚举能传字符串
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.WriteIndented = true;
+        });
+     
+
     //使用日志系统
     builder.Host.UseSerilog();
 
-    //配置 web 服务器监听端口和协议
-    builder.WebHost.ConfigureKestrel(options =>
-    {
-        options.ListenAnyIP(5153); // HTTP
-        options.ListenAnyIP(7292, listenOptions => listenOptions.UseHttps());
-    });
+    ////配置 web 服务器监听端口和协议
+    //builder.WebHost.ConfigureKestrel(options =>
+    //{
+    //    options.ListenAnyIP(5153); // HTTP
+    //    options.ListenAnyIP(7292, listenOptions => listenOptions.UseHttps());
+    //});
 
 
     //注册依赖和服务，数据库上下文 仓储服务 应用服务 Swagger Controllers等
@@ -41,9 +63,15 @@ try {
 
     //创建可运行的 WebApplication 实例 
     var app = builder.Build();
-    // 配置请求管道 UseRouting UseAuthentication UseAuthorization MapControllers
-    // 解析路由-识别身份-权限校验-控制器执行-返回响应
-    ConfigurePipeline(app);  
+
+    using (var scope = app.Services.CreateScope()) { 
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.EnsureCreated();    // 如果表不存在创建数据库表
+    }
+
+        // 配置请求管道 UseRouting UseAuthentication UseAuthorization MapControllers
+        // 解析路由-识别身份-权限校验-控制器执行-返回响应
+        ConfigurePipeline(app);  
      
     app.UseHttpsRedirection();
 
@@ -129,6 +157,8 @@ void ConfigurePipeline(WebApplication app) {
     app.UseAuthorization();
 
     app.UseCors("SugarPolicy");
+
+    app.UseMiddleware<DomainExceptionMiddleware>();
     //映射控制器路由
     app.MapControllers();
 }

@@ -1,7 +1,7 @@
 .vs/
 # 编译生成文件
-bin/
-obj/
+**/bin/
+**/obj/
 
 # 日志文件
-logs/
+**/logs/

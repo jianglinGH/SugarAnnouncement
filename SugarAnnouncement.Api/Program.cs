@@ -30,22 +30,15 @@ try {
     //构建ASP.NET Core Web应用构建器
     var builder = WebApplication.CreateBuilder(args);
 
-
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    Console.WriteLine(connectionString);
     var folder = Path.Combine(AppContext.BaseDirectory, "Data");
     if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
     var dbPath = Path.Combine(folder, "announcement_sugar.db");
+ 
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite($"Data Source={dbPath}"));
      
     builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
-
-    builder.Services.AddControllers()
-        .AddJsonOptions(options => {
-            // 枚举能传字符串
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.JsonSerializerOptions.WriteIndented = true;
-        });
-     
 
     //使用日志系统
     builder.Host.UseSerilog();
@@ -83,7 +76,7 @@ try {
 
 
 void ConfigureServices(IServiceCollection services) {
-    // 添加控制器MVC服务 配置 Json 序列化
+    // 添加控制器MVC服务 配置 Json 序列化 
     services.AddControllers()
         .AddJsonOptions(options => { 
             // 属性名改成驼峰输出

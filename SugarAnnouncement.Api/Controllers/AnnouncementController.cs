@@ -65,17 +65,19 @@ namespace SugarAnnouncement.Api.Controllers
             if (!Enum.TryParse<AnnouncementCategory>(dto.Category, true, out var cat)) { 
                 return BadRequest(ApiResponse<string>.Failure("分类不合法"));
             }
+            // 检查是否存在，存在更新
+            var entity = await _announcementRepository.GetByIdAsync(dto.Id);
+            if (entity == null) {
+                return BadRequest(ApiResponse<string>.Failure("此公告不存在，无法更新"));
+            }
             // DTO -> Entity 映射
-            var entity = new Announcement
-            {
-                Id = dto.Id,
-                Title = dto.Title,
-                Content = dto.Content,
-                Category = cat,
-                Author = dto.Author,
-                IsTop = dto.IsTop,
-                PublishTime = dto.PublishTime
-            };
+            entity.Title = dto.Title;// 触发领域校验
+            entity.Content = dto.Content;
+            entity.Category = cat;
+            entity.Author = dto.Author;
+            entity.IsTop = dto.IsTop;
+            entity.PublishTime = dto.PublishTime;
+          
             if (entity.PublishTime == default)
             {
                 entity.PublishTime = DateTime.Now;

@@ -64,8 +64,7 @@ namespace SugarAnnouncement.Infrastructure.Respositories
         }
 
         public async Task UpdateAsync(Announcement entity)
-        {
-            _db.Announcements.Update(entity);
+        { 
             await _db.SaveChangesAsync();
         }
 

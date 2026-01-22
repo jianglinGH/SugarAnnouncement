@@ -32,8 +32,12 @@ namespace SugarAnnouncement.Infrastructure.Respositories
         {
             var q = _db.Announcements.AsQueryable(); 
             if (!string.IsNullOrEmpty(category)) {
-                if (Enum.TryParse<AnnouncementCategory>(category, true, out var cat)) {
+                if (Enum.TryParse<AnnouncementCategory>(category, true, out var cat))
+                {
                     q = q.Where(a => a.Category == cat);
+                }
+                else {
+                    return new List<Announcement>();
                 }
               
             }

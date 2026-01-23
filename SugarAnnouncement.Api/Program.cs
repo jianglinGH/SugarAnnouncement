@@ -27,30 +27,25 @@ Log.Logger = new LoggerConfiguration()
 
 try {
     Log.Information("-------启动 Sugar API 服务-------");
-    //构建ASP.NET Core Web应用构建器
+    // 构建ASP.NET Core，Web应用构建器
     var builder = WebApplication.CreateBuilder(args);
-
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    Console.WriteLine(connectionString);
+    // 获取配置
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
     var folder = Path.Combine(AppContext.BaseDirectory, "Data");
     if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-    var dbPath = Path.Combine(folder, "announcement_sugar.db");
+    if (connectionString is null) {
+        throw new InvalidOperationException("未找到 DefaultConnection 字符串配置");
+    }
+    var dbPath = Path.Combine(folder, connectionString);
  
+    //注册 DbContext 依赖，使用 SQLite
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite($"Data Source={dbPath}"));
-     
+    //每个 HTTP 请求创建一个实例， Repository, DbContext 都是 Scoped 生命周期，如果需要 IAnnouncementRepository，那么给予 AnnouncementRepository 实例
     builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
 
     //使用日志系统
     builder.Host.UseSerilog();
-
-    ////配置 web 服务器监听端口和协议
-    //builder.WebHost.ConfigureKestrel(options =>
-    //{
-    //    options.ListenAnyIP(5153); // HTTP
-    //    options.ListenAnyIP(7292, listenOptions => listenOptions.UseHttps());
-    //});
-
-
+   
     //注册依赖和服务，数据库上下文 仓储服务 应用服务 Swagger Controllers等
     ConfigureServices(builder.Services);
 
@@ -150,7 +145,7 @@ void ConfigurePipeline(WebApplication app) {
     app.UseAuthorization();
 
     app.UseCors("SugarPolicy");
-
+    //中间件 异常处理
     app.UseMiddleware<DomainExceptionMiddleware>();
     //映射控制器路由
     app.MapControllers();
